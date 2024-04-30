@@ -28,6 +28,8 @@ from timm.optim.sgdp import SGDP
 from adan import Adan
 from sam import SAM
 
+from came_pytorch import CAME
+
 
 try:
     from apex.optimizers import FusedNovoGrad, FusedAdam, FusedLAMB, FusedSGD
@@ -315,6 +317,9 @@ def create_optimizer_v2(
     elif opt_lower == 'lion':
         opt_args.pop('eps', None)
         optimizer = Lion(parameters, **opt_args)
+    elif opt_lower == 'came':
+        opt_args.pop('eps', None)
+        optimizer = CAME(parameters, betas=(0.9, 0.999, 0.9999), eps=(1e-30, 1e-16))
 
     # second order
     elif opt_lower == 'adahessian':
