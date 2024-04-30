@@ -319,7 +319,7 @@ def create_optimizer_v2(
         optimizer = Lion(parameters, **opt_args)
     elif opt_lower == 'came':
         opt_args.pop('eps', None)
-        optimizer = CAME(parameters, betas=(0.9, 0.999, 0.9999), eps=(1e-30, 1e-16))
+        optimizer = CAME(parameters, lr=3e-4, weight_decay=1e-2, betas=(0.9, 0.999, 0.9999), eps=(1e-30, 1e-16))
 
     # second order
     elif opt_lower == 'adahessian':
